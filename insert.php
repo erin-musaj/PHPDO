@@ -25,7 +25,7 @@
         </form>
 <?php
     if(isset($_POST["nome"]) && isset($_POST["cognome"])){
-        require "db_connection.php";
+        require "connection.php";
         $nome = $_POST["nome"];
         $cognome = $_POST["cognome"];
         $result = $connection->prepare("INSERT INTO persona (Nome, Cognome) VALUES ('$nome', '$cognome')");

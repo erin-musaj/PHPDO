@@ -10,7 +10,7 @@
 
 <table>
 <?php
-    require "db_connection.php";
+    require "connection.php";
     $result = $connection->prepare("SELECT * FROM persona");
     $result->execute();
     echo "<table>";

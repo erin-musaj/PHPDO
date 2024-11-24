@@ -1,26 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
 <?php
-require "db_connection.php";
-If($connection!=null){
-    $result = $connection->prepare(
-    "CREATE TABLE IF NOT EXISTS `5ina`.`Persona`(
-        ID INT AUTO_INCREMENT,
-        Nome TEXT NOT NULL,
-        Cognome TEXT NOT NULL,
-        PRIMARY KEY(ID)
-        )
-    ");
-    $result->execute();
-    echo "<a href='login.php'><button>prosegui</button></a>";
+$host = "localhost";
+$db = "5ina";
+if (isset($_POST["pwd"]) && isset($_POST["usr"])) {
+    $usr = $_POST["usr"];
+    $pwd = $_POST["pwd"];
+    if($usr != "root" | $pwd != "" ){
+        
+        echo "Access Denied";
+        $connection = null;
+
+        } else {
+        try {
+            $connection = new PDO("mysql:host=$host;dbname=$db", "root", "");
+            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (Exception $e) {
+            echo "". $e->getMessage() ."";
+        }
+    }
+} else {
+    try {
+        $connection = new PDO("mysql:host=$host;dbname=$db", "root", "");
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (Exception $e) {
+        echo "". $e->getMessage() ."";
+    }
 }
 ?>
-</body>
-</html>
